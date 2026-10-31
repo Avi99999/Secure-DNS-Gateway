@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Event log · Secure DNS Gateway{% endblock %}
+{% block content %}
+<div class="toolbar">
+  <h1>Event log</h1>
+  <a class="btn" id="csv" href="/events.csv">Export CSV</a>
+</div>
+<form class="filters card" id="filters">
+  <input type="search" name="q" placeholder="Search domain or client IP">
+  <select name="verdict">
+    <option value="">All verdicts</option><option value="alerts">Blocked + suspicious</option>
+    <option value="allowed">Allowed</option><option value="blocked">Blocked</option><option value="suspicious">Suspicious</option>
+  </select>
+  <select name="attack_type">
+    <option value="">All attack types</option>
+    {% for key, label in attack_labels.items() %}<option value="{{ key }}">{{ label }}</option>{% endfor %}
+  </select>
+  <select name="range">
+    <option value="15m">Last 15 min</option><option value="1h">Last hour</option>
+    <option value="24h" selected>Last 24 h</option><option value="7d">Last 7 days</option><option value="all">All time</option>
+  </select>
+</form>
+<section class="card">
+  <div class="table-wrap">
+    <table class="events">
+      <thead><tr><th>#</th><th>Time</th><th>Client</th><th>Type</th><th>Domain</th><th>Verdict</th><th>Attack type</th><th class="num">Score</th><th>Reason / answer</th><th class="num">ms</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <div class="pager"><button class="btn" id="prev">‹ Newer</button><span id="pageinfo"></span><button class="btn" id="next">Older ›</button></div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='events.js') }}"></script>{% endblock %}

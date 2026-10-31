@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Settings · Secure DNS Gateway{% endblock %}
+{% block content %}
+<div class="toolbar"><h1>Settings</h1></div>
+<section class="card">
+  <p class="muted">Active configuration (read-only). Edit <code>{{ cfg_path }}</code> and restart the gateway to change it.</p>
+  <h2>Gateway</h2>
+  <table class="kv">
+    <tr><th>Listening on</th><td>{{ cfg.listen_address }}:{{ cfg.listen_port }} ({{ 'UDP + TCP' if cfg.enable_tcp else 'UDP' }})</td></tr>
+    <tr><th>Upstream resolver(s)</th><td>{% for u in cfg.upstreams %}{{ u.host }}:{{ u.port }}{% if not loop.last %}, {% endif %}{% endfor %}</td></tr>
+    <tr><th>Block response</th><td>{{ cfg.block_response }}</td></tr>
+    <tr><th>Database</th><td><code>{{ cfg.database }}</code></td></tr>
+    <tr><th>Allowlist</th><td><code>{{ cfg.allowlist_file }}</code></td></tr>
+  </table>
+  <h2>Detection thresholds</h2>
+  <table class="kv">
+    {% for k, v in cfg.detection.items() %}<tr><th>{{ k }}</th><td>{{ v }}</td></tr>{% endfor %}
+  </table>
+  <h2>Blacklist feeds</h2>
+  <table class="kv">
+    {% for f in cfg.blacklist_feeds %}<tr><th>{{ f.name }}</th><td>{{ f.url }}</td></tr>{% endfor %}
+  </table>
+</section>
+{% endblock %}

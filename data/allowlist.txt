@@ -1,0 +1,23 @@
+# Allowlist: domains (and their subdomains) that skip blacklist and naming /
+# payload heuristics. Rate limits still apply. Keep this short - it exists to
+# avoid false positives on CDNs and big platforms that legitimately use long,
+# random-looking hostnames.
+googlevideo.com
+gstatic.com
+googleapis.com
+googleusercontent.com
+akamaiedge.net
+akamaized.net
+akamaihd.net
+cloudfront.net
+amazonaws.com
+azureedge.net
+windowsupdate.com
+msedge.net
+trafficmanager.net
+fbcdn.net
+whatsapp.net
+apple.com
+icloud.com
+cdn.cloudflare.net
+fastly.net

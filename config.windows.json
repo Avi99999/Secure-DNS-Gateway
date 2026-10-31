@@ -1,0 +1,18 @@
+{
+  "_comment": "Windows deployment: Python security layer on port 53 of loopback and every LAN address ('auto' binds them individually so it wins over Windows' ICS DNS proxy), Unbound running in Docker on 127.0.0.1:5335 (docker compose up -d --build).",
+  "listen_address": "auto",
+  "listen_port": 53,
+  "enable_tcp": true,
+  "upstreams": [
+    {"host": "127.0.0.1", "port": 5335}
+  ],
+  "upstream_timeout": 3.0,
+  "block_response": "refused",
+  "database": "data/gateway.db",
+  "dashboard": {
+    "host": "127.0.0.1",
+    "port": 5000,
+    "username": "",
+    "password": ""
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "_comment": "Local development / demo on Windows or macOS without Unbound. Listens on 127.0.0.1:5300 and forwards straight to public resolvers. Use config.json on the Ubuntu VM.",
+  "listen_address": "127.0.0.1",
+  "listen_port": 5300,
+  "enable_tcp": true,
+  "upstreams": [
+    {"host": "127.0.0.1", "port": 5335},
+    {"host": "1.1.1.1", "port": 53},
+    {"host": "9.9.9.9", "port": 53}
+  ],
+  "upstream_timeout": 2.0,
+  "block_response": "refused",
+  "database": "data/gateway-dev.db",
+  "dashboard": {
+    "host": "127.0.0.1",
+    "port": 5000,
+    "username": "",
+    "password": ""
+  }
+}

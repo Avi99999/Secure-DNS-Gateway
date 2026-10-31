@@ -1,0 +1,25 @@
+# Seed blacklist, loaded automatically the first time the gateway starts.
+# Format: one domain per line, or hosts-file style "0.0.0.0 domain".
+# Subdomains of every entry are blocked too (suffix matching).
+# Grow it from public feeds with:  python main.py update-blacklist
+#
+# --- Test domains used by the validation scenarios (scripts/simulate_traffic.py)
+malware-test.example
+phishing-test.example
+c2-callback.example
+blocked-test.example
+
+# --- Public test / demo domains intended for blocking tests
+malware.wicar.org
+malware.testing.google.test
+testsafebrowsing.appspot.com
+
+# --- Unwanted tracking / advertising domains (common "unwanted domain" category)
+doubleclick.net
+googleadservices.com
+adservice.google.com
+ads.yahoo.com
+adnxs.com
+scorecardresearch.com
+taboola.com
+outbrain.com

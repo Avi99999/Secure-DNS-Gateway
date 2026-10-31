@@ -1,0 +1,15 @@
+[Unit]
+Description=Secure DNS Gateway - Flask monitoring dashboard
+After=network-online.target dns-gateway.service
+
+[Service]
+Type=simple
+User=__USER__
+WorkingDirectory=__DIR__
+ExecStart=__DIR__/.venv/bin/python main.py --config config.json dashboard
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

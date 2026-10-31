@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="toolbar">
+  <h1>Overview</h1>
+  <div class="seg" id="range">
+    <button data-range="15m">15m</button><button data-range="1h" class="on">1h</button>
+    <button data-range="24h">24h</button><button data-range="7d">7d</button>
+  </div>
+</div>
+
+<section class="kpis">
+  <div class="kpi"><div class="label">Total DNS requests</div><div class="value" id="k-total">–</div><div class="sub" id="k-latency"></div></div>
+  <div class="kpi allowed"><div class="label">Allowed</div><div class="value" id="k-allowed">–</div></div>
+  <div class="kpi blocked"><div class="label">Blocked</div><div class="value" id="k-blocked">–</div><div class="sub" id="k-rate"></div></div>
+  <div class="kpi suspicious"><div class="label">Suspicious (alerted)</div><div class="value" id="k-suspicious">–</div></div>
+  <div class="kpi"><div class="label">Blacklisted domains</div><div class="value" id="k-bl">–</div></div>
+</section>
+
+<section class="grid two">
+  <div class="card wide">
+    <h2>Requests over time</h2>
+    <div class="chart-box"><canvas id="timeline"></canvas></div>
+  </div>
+  <div class="card">
+    <h2>Detected attack types</h2>
+    <div class="chart-box small"><canvas id="attacks"></canvas></div>
+    <p class="empty" id="attacks-empty" hidden>No attacks detected in this range.</p>
+  </div>
+</section>
+
+<section class="grid three">
+  <div class="card"><h2>Top blocked domains</h2><table class="mini"><tbody id="top-blocked"></tbody></table></div>
+  <div class="card"><h2>Top queried domains</h2><table class="mini"><tbody id="top-domains"></tbody></table></div>
+  <div class="card"><h2>Top clients</h2><table class="mini"><tbody id="top-clients"></tbody></table></div>
+</section>
+
+<section class="card">
+  <div class="card-head"><h2>Live event feed</h2><label class="toggle"><input type="checkbox" id="alerts-only"> alerts only</label></div>
+  <div class="table-wrap">
+    <table class="events">
+      <thead><tr><th>Time</th><th>Client</th><th>Type</th><th>Domain</th><th>Verdict</th><th>Attack type</th><th>Reason</th><th class="num">ms</th></tr></thead>
+      <tbody id="feed"></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='overview.js') }}"></script>{% endblock %}

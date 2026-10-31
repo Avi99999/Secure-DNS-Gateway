@@ -1,0 +1,14 @@
+# Runs the Unbound resolver layer in Docker so the gateway works on Windows
+# without an Ubuntu VM. The Python security layer and dashboard run natively:
+#
+#   docker compose up -d --build
+#   python main.py --config config.windows.json all
+services:
+  unbound:
+    build: ./deploy/unbound
+    container_name: secure-dns-unbound
+    restart: unless-stopped
+    ports:
+      # Loopback only: clients must go through the Python security layer.
+      - "127.0.0.1:5335:5335/udp"
+      - "127.0.0.1:5335:5335/tcp"

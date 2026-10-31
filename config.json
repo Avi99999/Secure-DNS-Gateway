@@ -1,0 +1,17 @@
+{
+  "listen_address": "0.0.0.0",
+  "listen_port": 53,
+  "enable_tcp": true,
+  "upstreams": [
+    {"host": "127.0.0.1", "port": 5335}
+  ],
+  "upstream_timeout": 3.0,
+  "block_response": "refused",
+  "database": "data/gateway.db",
+  "dashboard": {
+    "host": "0.0.0.0",
+    "port": 5000,
+    "username": "admin",
+    "password": "change-me"
+  }
+}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Blacklist · Secure DNS Gateway{% endblock %}
+{% block content %}
+<div class="toolbar"><h1>Blacklist</h1><span class="muted" id="bl-total"></span></div>
+<section class="grid two">
+  <div class="card wide">
+    <div class="card-head"><h2>Entries</h2><input type="search" id="bl-q" placeholder="Search domains"></div>
+    <div class="table-wrap">
+      <table class="events"><thead><tr><th>Domain</th><th>Source</th><th>Category</th><th>Added</th><th></th></tr></thead><tbody id="bl-rows"></tbody></table>
+    </div>
+    <div class="pager"><button class="btn" id="bl-prev">‹ Prev</button><span id="bl-page"></span><button class="btn" id="bl-next">Next ›</button></div>
+  </div>
+  <div class="card">
+    <h2>Add domains</h2>
+    <p class="muted">One per line or comma separated. Subdomains of each entry are blocked too. The gateway picks up changes within a few seconds.</p>
+    <form id="bl-add">
+      <textarea name="domains" rows="6" placeholder="evil-domain.com&#10;phish.example.net"></textarea>
+      <select name="category"><option>malicious</option><option>phishing</option><option>malware</option><option>c2</option><option>ads</option><option>unwanted</option></select>
+      <button class="btn primary" type="submit">Add to blacklist</button>
+    </form>
+    <p id="bl-msg" class="muted"></p>
+    <h2 style="margin-top:1.2rem">By source</h2>
+    <table class="mini"><tbody id="bl-sources"></tbody></table>
+    <p class="muted">Import public feeds with <code>python main.py update-blacklist</code>.</p>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='blacklist.js') }}"></script>{% endblock %}

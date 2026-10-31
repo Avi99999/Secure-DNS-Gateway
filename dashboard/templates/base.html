@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Secure DNS Gateway{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm0 2.2 6 2.2V11c0 4-2.6 7.8-6 8.9-3.4-1.1-6-4.9-6-8.9V6.4l6-2.2z"/></svg>
+      <span>Secure DNS Gateway</span>
+    </div>
+    <nav>
+      <a href="/" class="{{ 'active' if page == 'overview' }}">Overview</a>
+      <a href="/events" class="{{ 'active' if page == 'events' }}">Event log</a>
+      <a href="/blacklist" class="{{ 'active' if page == 'blacklist' }}">Blacklist</a>
+      <a href="/settings" class="{{ 'active' if page == 'settings' }}">Settings</a>
+    </nav>
+    <div id="gw-status" class="status unknown" title="Gateway heartbeat"><span class="dot"></span><span class="txt">checking…</span></div>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <div id="toasts"></div>
+  <footer>Secure DNS Gateway v{{ version }} · Unbound + Python security layer + SQLite + Flask</footer>
+  <script src="{{ url_for('static', filename='common.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
